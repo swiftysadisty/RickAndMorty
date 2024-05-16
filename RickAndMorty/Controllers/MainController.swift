@@ -68,6 +68,15 @@ class MainController: UIViewController {
         
         let leftItem = UIBarButtonItem(customView: titleNavigaton)
         self.navigationItem.leftBarButtonItem = leftItem
+        let appearance = UINavigationBarAppearance()
+        
+        appearance.backgroundColor = .background
+        
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        
+        
     }
 }
 

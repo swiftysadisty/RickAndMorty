@@ -22,7 +22,6 @@ final class PersonCellCollection: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupElements()
-        
     }
     
     required init?(coder: NSCoder) {
