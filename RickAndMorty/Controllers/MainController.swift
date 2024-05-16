@@ -2,10 +2,7 @@ import SnapKit
 import UIKit
 
 class MainController: UIViewController {
-    private var data: [Person] = [Person(name: "mmm", image: "1.square"),
-                                  Person(name: "hh", image: "2.square"),
-                                  Person(name: "asdasd", image: "3.square")
-    ]
+    private var data: [Person] = []
     
     private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -13,12 +10,13 @@ class MainController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(PersonCellCollection.self, forCellWithReuseIdentifier: PersonCellCollection.identifier)
         collectionView.backgroundColor = .background
+        collectionView.showsVerticalScrollIndicator = false
         return collectionView
     }()
     
     private var viewCharacters: UIView = {
         var viewCharacters = UIView()
-
+        
         return viewCharacters
     }()
     
@@ -26,8 +24,21 @@ class MainController: UIViewController {
         super.viewDidLoad()
         setupNavigation()
         setupCollectonView()
+        getPost()
         view.backgroundColor = .background
+        collectionView.reloadData()
     }
+    
+    private func getPost() {
+        APIManager.shared.getPosts {[weak self] post in
+            DispatchQueue.main.async {
+                self?.data = post.results
+                self?.collectionView.reloadData()
+            }
+        }
+    }
+    
+    
     
     private func setupCollectonView() {
         view.addSubview(viewCharacters)
@@ -44,7 +55,7 @@ class MainController: UIViewController {
         collectionView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
-       
+        
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -76,7 +87,7 @@ extension MainController: UICollectionViewDataSource {
 
 extension MainController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+        
         return CGSize(width: 156, height: 202)
     }
     
@@ -88,7 +99,7 @@ extension MainController: UICollectionViewDelegateFlowLayout {
         return 16
     }
 }
- 
+
 
 
 #Preview{MainController()}
