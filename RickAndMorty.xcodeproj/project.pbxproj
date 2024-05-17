@@ -10,6 +10,7 @@
 		49C4D70C6FE895D3D189EFCC /* Pods_RickAndMorty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA020927D072EB38476572A4 /* Pods_RickAndMorty.framework */; };
 		A50267212BEE493C001AE5BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A50267202BEE493C001AE5BF /* Assets.xcassets */; };
 		A51F84612BF029D600DBBC66 /* Gilroy-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51F84602BF029D600DBBC66 /* Gilroy-SemiBold.ttf */; };
+		A51F84642BF1070A00DBBC66 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F84632BF1070A00DBBC66 /* APIManager.swift */; };
 		A52E45942BEC5AFC009F7CE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52E45932BEC5AFC009F7CE4 /* AppDelegate.swift */; };
 		A52E45962BEC5AFC009F7CE4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52E45952BEC5AFC009F7CE4 /* SceneDelegate.swift */; };
 		A52E45982BEC5AFC009F7CE4 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52E45972BEC5AFC009F7CE4 /* MainController.swift */; };
@@ -28,6 +29,7 @@
 		5C35775E413CBD2159B8CF96 /* Pods-RickAndMorty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RickAndMorty.release.xcconfig"; path = "Target Support Files/Pods-RickAndMorty/Pods-RickAndMorty.release.xcconfig"; sourceTree = "<group>"; };
 		A50267202BEE493C001AE5BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A51F84602BF029D600DBBC66 /* Gilroy-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-SemiBold.ttf"; sourceTree = "<group>"; };
+		A51F84632BF1070A00DBBC66 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		A52E45902BEC5AFC009F7CE4 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A52E45932BEC5AFC009F7CE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A52E45952BEC5AFC009F7CE4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +66,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A51F84622BF106FB00DBBC66 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				A51F84632BF1070A00DBBC66 /* APIManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		A52E45872BEC5AFC009F7CE4 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +95,7 @@
 		A52E45922BEC5AFC009F7CE4 /* RickAndMorty */ = {
 			isa = PBXGroup;
 			children = (
+				A51F84622BF106FB00DBBC66 /* Manager */,
 				A52E45A82BEC5C79009F7CE4 /* Models */,
 				A52E45A72BEC5C70009F7CE4 /* View */,
 				A52E45A92BEC5C87009F7CE4 /* Controllers */,
@@ -288,6 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A51F84642BF1070A00DBBC66 /* APIManager.swift in Sources */,
 				A52E45982BEC5AFC009F7CE4 /* MainController.swift in Sources */,
 				A52E45942BEC5AFC009F7CE4 /* AppDelegate.swift in Sources */,
 				A5EFFC1B2BEFD2EF00C21013 /* Person.swift in Sources */,
@@ -445,6 +457,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -474,6 +487,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
