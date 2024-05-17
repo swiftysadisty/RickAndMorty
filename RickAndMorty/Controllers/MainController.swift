@@ -68,15 +68,13 @@ class MainController: UIViewController {
         
         let leftItem = UIBarButtonItem(customView: titleNavigaton)
         self.navigationItem.leftBarButtonItem = leftItem
-        let appearance = UINavigationBarAppearance()
         
+        let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .background
         
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
-        
-        
     }
 }
 
@@ -91,6 +89,14 @@ extension MainController: UICollectionViewDataSource {
         cell.backgroundColor = .backgroundCell
         cell.layer.cornerRadius = 16
         return cell
+    }
+}
+
+extension MainController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      let controller = InfoPersonController()
+        controller.configureController(with: data[indexPath.row])
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 
