@@ -11,6 +11,7 @@
 		A50267212BEE493C001AE5BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A50267202BEE493C001AE5BF /* Assets.xcassets */; };
 		A51F84612BF029D600DBBC66 /* Gilroy-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51F84602BF029D600DBBC66 /* Gilroy-SemiBold.ttf */; };
 		A51F84642BF1070A00DBBC66 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F84632BF1070A00DBBC66 /* APIManager.swift */; };
+		A51F84662BF6CA2A00DBBC66 /* InfoPersonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F84652BF6CA2A00DBBC66 /* InfoPersonController.swift */; };
 		A52E45942BEC5AFC009F7CE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52E45932BEC5AFC009F7CE4 /* AppDelegate.swift */; };
 		A52E45962BEC5AFC009F7CE4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52E45952BEC5AFC009F7CE4 /* SceneDelegate.swift */; };
 		A52E45982BEC5AFC009F7CE4 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52E45972BEC5AFC009F7CE4 /* MainController.swift */; };
@@ -30,6 +31,7 @@
 		A50267202BEE493C001AE5BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A51F84602BF029D600DBBC66 /* Gilroy-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-SemiBold.ttf"; sourceTree = "<group>"; };
 		A51F84632BF1070A00DBBC66 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		A51F84652BF6CA2A00DBBC66 /* InfoPersonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPersonController.swift; sourceTree = "<group>"; };
 		A52E45902BEC5AFC009F7CE4 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A52E45932BEC5AFC009F7CE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A52E45952BEC5AFC009F7CE4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				A52E45972BEC5AFC009F7CE4 /* MainController.swift */,
+				A51F84652BF6CA2A00DBBC66 /* InfoPersonController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				A5EFFC1B2BEFD2EF00C21013 /* Person.swift in Sources */,
 				A5EFFC1D2BEFD3B300C21013 /* PersonCellCollection.swift in Sources */,
 				A52E45962BEC5AFC009F7CE4 /* SceneDelegate.swift in Sources */,
+				A51F84662BF6CA2A00DBBC66 /* InfoPersonController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

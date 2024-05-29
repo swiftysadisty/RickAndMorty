@@ -3,6 +3,7 @@ import UIKit
 
 final class PersonCellCollection: UICollectionViewCell {
     static let identifier = "PersonCellCollection"
+    
     private var imageCell =  {
         var imageCell = UIImageView()
         imageCell.contentMode = .scaleAspectFit
@@ -10,6 +11,7 @@ final class PersonCellCollection: UICollectionViewCell {
         imageCell.layer.masksToBounds = true
         return imageCell
     }()
+    
     private var labelCell: UILabel = {
         var labelCell = UILabel()
         labelCell.font = UIFont(name: "Gilroy-SemiBold", size: 17)
@@ -28,18 +30,13 @@ final class PersonCellCollection: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
     func configureCell(with person: Person) {
-        
         APIManager.shared.getImage(from: person.image) { [weak self] image in
             DispatchQueue.main.async {
                 self?.imageCell.image = image
             }
         }
-        
         labelCell.text = person.name
-        
     }
     
     private func setupElements() {
@@ -53,10 +50,14 @@ final class PersonCellCollection: UICollectionViewCell {
         }
         labelCell.snp.makeConstraints { maker in
             maker.top.equalTo(imageCell.snp.bottom).offset(16)
-            //maker.centerX.equalToSuperview()
             maker.leading.equalToSuperview().offset(8)
             maker.trailing.equalToSuperview().offset(-8)
         }
+        
+    }
+    
+    @objc func onCellTap() {
+        
     }
 }
 
