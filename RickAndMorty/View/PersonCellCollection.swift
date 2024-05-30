@@ -56,9 +56,6 @@ final class PersonCellCollection: UICollectionViewCell {
         
     }
     
-    @objc func onCellTap() {
-        
-    }
 }
 
 #Preview{PersonCellCollection()}

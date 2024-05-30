@@ -16,6 +16,7 @@ struct Person: Codable {
     let species: Species
     let status: Status
     let gender: Gender
+    let origin, location: Location
 }
 
 enum Species: String, Codable {
@@ -34,4 +35,9 @@ enum Gender: String, Codable {
     case female = "Female"
     case male = "Male"
     case unknown = "unknown"
+}
+
+struct Location: Codable {
+    let name: String
+    let url: String
 }
