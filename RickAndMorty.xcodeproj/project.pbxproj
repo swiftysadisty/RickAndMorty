@@ -16,6 +16,8 @@
 		A52329112C067CB700F9BD9E /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52329102C067CB700F9BD9E /* test.swift */; };
 		A52329132C07379000F9BD9E /* StackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52329122C07379000F9BD9E /* StackInfo.swift */; };
 		A52329152C073C1800F9BD9E /* InfoLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52329142C073C1800F9BD9E /* InfoLabelView.swift */; };
+		A52426162C09319200A760F3 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52426152C09319200A760F3 /* PersonCell.swift */; };
+		A52426182C0936A400A760F3 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52426172C0936A400A760F3 /* Episode.swift */; };
 		A52E45942BEC5AFC009F7CE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52E45932BEC5AFC009F7CE4 /* AppDelegate.swift */; };
 		A52E45962BEC5AFC009F7CE4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52E45952BEC5AFC009F7CE4 /* SceneDelegate.swift */; };
 		A52E45982BEC5AFC009F7CE4 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52E45972BEC5AFC009F7CE4 /* MainController.swift */; };
@@ -41,6 +43,8 @@
 		A52329102C067CB700F9BD9E /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		A52329122C07379000F9BD9E /* StackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackInfo.swift; sourceTree = "<group>"; };
 		A52329142C073C1800F9BD9E /* InfoLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoLabelView.swift; sourceTree = "<group>"; };
+		A52426152C09319200A760F3 /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
+		A52426172C0936A400A760F3 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		A52E45902BEC5AFC009F7CE4 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A52E45932BEC5AFC009F7CE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A52E45952BEC5AFC009F7CE4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 				A52329122C07379000F9BD9E /* StackInfo.swift */,
 				A52329142C073C1800F9BD9E /* InfoLabelView.swift */,
 				A5D40E052C07E84C004EF64E /* LabelOriginResult.swift */,
+				A52426152C09319200A760F3 /* PersonCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -135,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				A5EFFC1A2BEFD2EF00C21013 /* Person.swift */,
+				A52426172C0936A400A760F3 /* Episode.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -318,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A52329132C07379000F9BD9E /* StackInfo.swift in Sources */,
+				A52426162C09319200A760F3 /* PersonCell.swift in Sources */,
 				A5D40E062C07E84C004EF64E /* LabelOriginResult.swift in Sources */,
 				A51F84642BF1070A00DBBC66 /* APIManager.swift in Sources */,
 				A52E45982BEC5AFC009F7CE4 /* MainController.swift in Sources */,
@@ -328,6 +335,7 @@
 				A52329092C000F4A00F9BD9E /* TitleLabel.swift in Sources */,
 				A52E45962BEC5AFC009F7CE4 /* SceneDelegate.swift in Sources */,
 				A51F84662BF6CA2A00DBBC66 /* InfoPersonController.swift in Sources */,
+				A52426182C0936A400A760F3 /* Episode.swift in Sources */,
 				A52329152C073C1800F9BD9E /* InfoLabelView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

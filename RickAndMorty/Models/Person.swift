@@ -15,6 +15,7 @@ struct Person: Codable {
     let created: String
     let species: Species
     let status: Status
+    let episode: [String]
     let gender: Gender
     let origin, location: Location
 }
