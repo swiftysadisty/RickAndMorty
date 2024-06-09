@@ -16,7 +16,6 @@ class MainController: UIViewController {
     
     private var viewCharacters: UIView = {
         var viewCharacters = UIView()
-        
         return viewCharacters
     }()
     
@@ -37,25 +36,19 @@ class MainController: UIViewController {
             }
         }
     }
-    
-    
-    
+
     private func setupCollectonView() {
         view.addSubview(viewCharacters)
         viewCharacters.addSubview(collectionView)
         viewCharacters.snp.makeConstraints { maker in
-            
             maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(31)
             maker.leading.equalToSuperview().offset(20)
             maker.trailing.equalToSuperview().offset(-27)
             maker.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-            
         }
-        
         collectionView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
-        
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -79,9 +72,7 @@ class MainController: UIViewController {
 }
 
 extension MainController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
-    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { return data.count }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonCellCollection.identifier, for: indexPath) as? PersonCellCollection else { return UICollectionViewCell() }
