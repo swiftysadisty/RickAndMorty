@@ -3,9 +3,11 @@ import UIKit
 
 class PersonCell: UITableViewCell {
     static let identifier = "PersonCell"
+    
     private let nameEpisodes: UILabel = {
         let label = UILabel()
         label.textColor = .white
+        label.numberOfLines = 0
         label.font = UIFont(name: "Gilroy-SemiBold", size: 17)
         return label
     }()
@@ -28,8 +30,6 @@ class PersonCell: UITableViewCell {
         setupElements()
     }
     
-   
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -40,7 +40,6 @@ class PersonCell: UITableViewCell {
         dateEpisodes.text = element.air_date
     }
        
-  
     private func setupElements() {
        addSubview(nameEpisodes)
         addSubview(whichEpisodes)
@@ -49,6 +48,7 @@ class PersonCell: UITableViewCell {
         nameEpisodes.snp.makeConstraints { maker in
             maker.top.equalToSuperview().offset(16)
             maker.leading.equalToSuperview().offset(16)
+            maker.trailing.equalToSuperview().offset(-16)
         }
         whichEpisodes.snp.makeConstraints { maker in
             maker.top.equalTo(nameEpisodes.snp.bottom).offset(16)

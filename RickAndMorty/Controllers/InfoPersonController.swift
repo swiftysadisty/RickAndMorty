@@ -4,18 +4,11 @@ import Kingfisher
 
 class InfoPersonController: UIViewController {
     private var data: [Episode] = []
+    private var tableViewHeightConstraint: Constraint?
     
-    private let tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.register(PersonCell.self, forCellReuseIdentifier: PersonCell.identifier)
-        tableView.backgroundColor = .clear
-        tableView.isScrollEnabled = false
-        return tableView
-    }()
-    
-    private let scrollView: UIScrollView = {
-        let scroll = UIScrollView()
-        return scroll
+    private let contentView: UIView = {
+        let view = UIView()
+        return view
     }()
     
     private let personImage: UIImageView = {
@@ -40,6 +33,12 @@ class InfoPersonController: UIViewController {
     private let episodesPerson: TitleLabel = {
         let label = TitleLabel()
         label.text = "Episodes"
+        return label
+    }()
+    
+    private let originLabel: TitleLabel = {
+        let label = TitleLabel()
+        label.text = "Planet"
         return label
     }()
     
@@ -115,26 +114,19 @@ class InfoPersonController: UIViewController {
         return typeLabel
     }()
     
-    private let originLabel: TitleLabel = {
-        let label = TitleLabel()
-        label.text = "Planet"
-        return label
+    private let typeLabelResult: InfoLabelView = {
+        let typeLabelResult = InfoLabelView()
+        typeLabelResult.textColor = .white
+        return typeLabelResult
     }()
-    
+ 
     private let originLabelResult: LabelOriginResult = {
         let originLabelResult = LabelOriginResult()
         return originLabelResult
     }()
     
-    private let typeLabelResult: InfoLabelView = {
-        let typeLabel = InfoLabelView()
-        typeLabel.textColor = .white
-        
-        return typeLabel
-    }()
-    
     private lazy var mainStackInfo: UIStackView = {
-        let mainStackInfo = UIStackView(arrangedSubviews: [speciesStack,typeStack, genderStack])
+        let mainStackInfo = UIStackView(arrangedSubviews: [speciesStack, typeStack, genderStack])
         mainStackInfo.axis = .vertical
         mainStackInfo.distribution = .fillEqually
         mainStackInfo.spacing = 16
@@ -158,6 +150,18 @@ class InfoPersonController: UIViewController {
         return stackInfo
     }()
     
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(PersonCell.self, forCellReuseIdentifier: PersonCell.identifier)
+        tableView.backgroundColor = .clear
+        tableView.isScrollEnabled = false
+        return tableView
+    }()
+    
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,18 +169,22 @@ class InfoPersonController: UIViewController {
         setupElements()
         tableView.dataSource = self
         tableView.delegate = self
+        
+        tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
+    }
+    //хз че это это все gpt
+    deinit {
+        tableView.removeObserver(self, forKeyPath: "contentSize")
     }
     
-   
-    
     func configureController(with element: Person) {
+        
         DispatchQueue.main.async {
             let url = URL(string: element.image)
             self.personImage.kf.setImage(with: url)
             self.tableView.reloadData()
         }
-        
-        
+       
         for item in element.episode {
             APIManager.shared.getEpisodes(from: item) { [weak self] post in
                 DispatchQueue.main.async {
@@ -189,6 +197,10 @@ class InfoPersonController: UIViewController {
         
         personName.text = element.name
         statusPerson.text = element.status.rawValue
+        speciesResult.text = element.species.rawValue
+        genderResult.text = element.gender.rawValue
+        originLabelResult.text = element.origin.name
+        
         switch element.status {
         case .alive:
             statusPerson.textColor = .green
@@ -198,42 +210,46 @@ class InfoPersonController: UIViewController {
             statusPerson.textColor = .gray
         }
         
-        speciesResult.text = element.species.rawValue
-        genderResult.text = element.gender.rawValue
         
         if !element.type.isEmpty {
             typeLabelResult.text = element.type
         } else {
             typeLabelResult.text = "None"
         }
-        
-        originLabelResult.text = element.origin.name
     }
     
     private func setupView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
         
-        view.addSubview(personName)
-        view.addSubview(personImage)
-        view.addSubview(statusPerson)
-        view.addSubview(infoPerson)
-        view.addSubview(infoView)
+        contentView.addSubview(personImage)
+        contentView.addSubview(personName)
+        contentView.addSubview(statusPerson)
+        contentView.addSubview(infoPerson)
+        contentView.addSubview(infoView)
         infoView.addSubview(mainStackInfo)
-        view.addSubview(originPerson)
-        view.addSubview(originView)
+        contentView.addSubview(originPerson)
+        contentView.addSubview(originView)
         originView.addSubview(originBackground)
         originBackground.addSubview(originImage)
         originView.addSubview(originLabel)
         originView.addSubview(originLabelResult)
-        view.addSubview(episodesPerson)
-        view.addSubview(tableView)
-        
+        contentView.addSubview(episodesPerson)
+        contentView.addSubview(tableView)
     }
     
     private func setupElements() {
         setupView()
         
+        scrollView.snp.makeConstraints { maker in
+            maker.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        contentView.snp.makeConstraints { maker in
+            maker.edges.equalTo(scrollView)
+            maker.width.equalTo(scrollView)
+        }
         personImage.snp.makeConstraints { maker in
-            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            maker.top.equalTo(contentView.snp.top).offset(16)
             maker.centerX.equalToSuperview()
             maker.height.equalTo(148)
             maker.width.equalTo(148)
@@ -260,7 +276,7 @@ class InfoPersonController: UIViewController {
             maker.edges.equalToSuperview()
         }
         originPerson.snp.makeConstraints { maker in
-            maker.top.equalTo(mainStackInfo.snp.bottom).offset(24)
+            maker.top.equalTo(infoView.snp.bottom).offset(24)
             maker.leading.equalToSuperview().offset(24)
         }
         originView.snp.makeConstraints { maker in
@@ -295,9 +311,18 @@ class InfoPersonController: UIViewController {
             maker.leading.equalToSuperview().offset(24)
             maker.trailing.equalToSuperview().offset(-24)
             maker.bottom.equalToSuperview()
+            //строчка ниже тоже хз че это
+            tableViewHeightConstraint = maker.height.equalTo(400).constraint
         }
-        scrollView.snp.makeConstraints { maker in
-            
+    }
+    
+    //хз че это, chatGpt так сказал, выглядит кринжатиной
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "contentSize" {
+            if let newSize = change?[.newKey] as? CGSize {
+                tableViewHeightConstraint?.update(offset: newSize.height)
+                view.layoutIfNeeded()
+            }
         }
     }
     
@@ -308,7 +333,7 @@ class InfoPersonController: UIViewController {
 
 extension InfoPersonController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -337,5 +362,4 @@ extension InfoPersonController: UITableViewDelegate {
         return 5
     }
 }
-
 #Preview{InfoPersonController()}
