@@ -7,4 +7,5 @@ target 'RickAndMorty' do
 
   # Pods for RickAndMorty
 pod 'SnapKit'
+pod 'Kingfisher', '~> 7.0'
 end

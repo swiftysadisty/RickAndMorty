@@ -1,7 +1,23 @@
 import UIKit
 import SnapKit
+import Kingfisher
 
 class InfoPersonController: UIViewController {
+    private var data: [Episode] = []
+    
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(PersonCell.self, forCellReuseIdentifier: PersonCell.identifier)
+        tableView.backgroundColor = .clear
+        tableView.isScrollEnabled = false
+        return tableView
+    }()
+    
+    private let scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        return scroll
+    }()
+    
     private let personImage: UIImageView = {
         let personImage = UIImageView()
         personImage.layer.cornerRadius = 10
@@ -147,14 +163,28 @@ class InfoPersonController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .background
         setupElements()
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
+   
+    
     func configureController(with element: Person) {
-        APIManager.shared.getImage(from: element.image) { [weak self] image in
-            DispatchQueue.main.async {
-                self?.personImage.image = image
+        DispatchQueue.main.async {
+            let url = URL(string: element.image)
+            self.personImage.kf.setImage(with: url)
+            self.tableView.reloadData()
+        }
+        
+        
+        for item in element.episode {
+            APIManager.shared.getEpisodes(from: item) { [weak self] post in
+                DispatchQueue.main.async {
+                    guard let post = post else { return }
+                    self?.data.append(post)
+                    self?.tableView.reloadData()
+                }
             }
-            
         }
         
         personName.text = element.name
@@ -181,6 +211,7 @@ class InfoPersonController: UIViewController {
     }
     
     private func setupView() {
+        
         view.addSubview(personName)
         view.addSubview(personImage)
         view.addSubview(statusPerson)
@@ -193,6 +224,9 @@ class InfoPersonController: UIViewController {
         originBackground.addSubview(originImage)
         originView.addSubview(originLabel)
         originView.addSubview(originLabelResult)
+        view.addSubview(episodesPerson)
+        view.addSubview(tableView)
+        
     }
     
     private func setupElements() {
@@ -252,6 +286,55 @@ class InfoPersonController: UIViewController {
             maker.top.equalTo(originLabel.snp.bottom).offset(8)
             maker.leading.equalTo(originBackground.snp.trailing).offset(16)
         }
+        episodesPerson.snp.makeConstraints { maker in
+            maker.top.equalTo(originView.snp.bottom).offset(24)
+            maker.leading.equalToSuperview().offset(24)
+        }
+        tableView.snp.makeConstraints { maker in
+            maker.top.equalTo(episodesPerson.snp.bottom).offset(16)
+            maker.leading.equalToSuperview().offset(24)
+            maker.trailing.equalToSuperview().offset(-24)
+            maker.bottom.equalToSuperview()
+        }
+        scrollView.snp.makeConstraints { maker in
+            
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return data.count
+    }
+}
+
+extension InfoPersonController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PersonCell.identifier, for: indexPath) as? PersonCell else { return UITableViewCell() }
+        cell.configureCell(with: data[indexPath.section])
+        cell.backgroundColor = .backgroundCell
+        cell.layer.cornerRadius = 16
+        cell.selectionStyle = .none
+        
+        return cell
+    }
+}
+
+extension InfoPersonController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 86
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = view.backgroundColor
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 5
     }
 }
 

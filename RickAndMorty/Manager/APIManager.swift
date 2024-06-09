@@ -4,7 +4,7 @@ class APIManager {
     static let shared = APIManager()
     private let baseUrl = "https://rickandmortyapi.com/api"
     private let postEndPoint = "/character"
-    private var images = UIImageView()
+    private let lastEndPoint = "/episode"
     
     func getPosts(complition: @escaping(PersonElement) -> Void) {
         guard let url: URL = URL(string: baseUrl + postEndPoint) else { return }
@@ -15,7 +15,6 @@ class APIManager {
             
             if let posts = try? JSONDecoder().decode(PersonElement.self, from: data) {
                 complition( posts )
-                
             } else {
                 print(error)
             }
@@ -23,15 +22,35 @@ class APIManager {
         task.resume()
     }
     
-    func getImage(from urlString: String, completion: @escaping(UIImage?) -> Void) {
+
+    
+    func getEpisodes(from urlString: String, completion: @escaping(Episode?) -> Void) {
         guard let url = URL(string: urlString) else { return }
-        
-        let taskImage = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data else { return }
+
+        let taskEpisode = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+              
+                completion(nil)
+                return
+            }
+
+            guard let data = data else {
+                print("No data returned")
+                completion(nil)
+                return
+            }
             
-            let image = UIImage(data: data)
-            completion(image)
+
+            do {
+                let posts = try JSONDecoder().decode(Episode.self, from: data)
+                completion(posts)
+                
+            } catch let jsonError {
+                print("Error decoding JSON: \(jsonError)")
+                completion(nil)
+            }
         }
-        taskImage.resume()
+        taskEpisode.resume()
     }
+
 }

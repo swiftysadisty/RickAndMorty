@@ -1,10 +1,11 @@
 import SnapKit
 import UIKit
+import Kingfisher
 
 final class PersonCellCollection: UICollectionViewCell {
     static let identifier = "PersonCellCollection"
     
-    private var imageCell =  {
+    private var imageCell: UIImageView =  {
         var imageCell = UIImageView()
         imageCell.contentMode = .scaleAspectFit
         imageCell.layer.cornerRadius = 10
@@ -31,11 +32,9 @@ final class PersonCellCollection: UICollectionViewCell {
     }
     
     func configureCell(with person: Person) {
-        APIManager.shared.getImage(from: person.image) { [weak self] image in
-            DispatchQueue.main.async {
-                self?.imageCell.image = image
-            }
-        }
+        
+        let url = URL(string: person.image)
+        imageCell.kf.setImage(with: url)
         labelCell.text = person.name
     }
     
